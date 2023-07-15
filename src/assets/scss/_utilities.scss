@@ -1,0 +1,14 @@
+%btn {
+    padding: 2vh 4vh;
+    border: 1px solid $secondary-color;
+    border-radius: 15px;
+    transition: all 0.75s;
+    &:hover{
+        background: $secondary-color;
+        color: #343434;
+    }
+}
+
+.bz-btn {
+    @extend %btn;
+}
