@@ -22,16 +22,24 @@
 
                     <li>
 
+                        <router-link to="/Chat">
+                            Chat
+                        </router-link>
+
+                    </li>
+                    <li>
+
                         <router-link to="/About">
                             About
                         </router-link>
 
                     </li>
                     <li>
-                        <router-link to="/community">
-                            community
+                        <router-link to="/Login">
+                            Login
                         </router-link>
                     </li>
+
                     <li>
 
                         <router-link to="/Market">
@@ -43,7 +51,7 @@
                         <a v-if="!isLoggedin && isMetamaskSupported" @click="requestMeta" class="bz-btn" to="/Market">
                             Connect wallet
                         </a>
-                        <p id="wallet" v-else-if="isLoggedin && isMetamaskSupported" @click="isLoggedin= false">
+                        <p id="wallet" v-else-if="isLoggedin && isMetamaskSupported" @click="isLoggedin = false">
                             {{ address.substring(0, 5) + '...' }}
                         </p>
                         <p v-else="isMetamaskSupported">
@@ -58,9 +66,9 @@
                 </div>
             </div>
         </nav>
+
         <transition appear name="nav">
-            <div v-if="activeMenu && ![`LoginForm`, `Signup`, `dashboard`].includes($route.name)"
-                class="navlinks-mobile">
+            <div v-if="activeMenu && ![`LoginForm`, `Signup`, `dashboard`].includes($route.name)" class="navlinks-mobile">
                 <div @click="toggleMenu" class="menu-icon">
                     <i class="fa-solid fa-close"></i>
                 </div>
@@ -80,21 +88,22 @@
                         </router-link>
 
                     </li>
-                    <li @click="activeMenu = false">
-                        <router-link to="/community">
-                            community
-                        </router-link>
-                    </li>
+
                     <li @click="activeMenu = false">
                         <router-link to="/Market">
                             Market
+                        </router-link>
+                    </li>
+                    <li @click="activeMenu = false">
+                        <router-link to="/Login">
+                            Login/SignUp
                         </router-link>
                     </li>
                     <li @click="address.length > 0 ? activeMenu = false : activeMenu = true">
                         <a v-if="!isLoggedin && isMetamaskSupported" @click="requestMeta">
                             Connect wallet
                         </a>
-                        <p id="wallet" v-else-if="isLoggedin && isMetamaskSupported" @click="isLoggedin= false">
+                        <p id="wallet" v-else-if="isLoggedin && isMetamaskSupported" @click="isLoggedin = false">
                             {{ address.substring(0, 5) + '...' }}
                         </p>
                         <p v-else="isMetamaskSupported">
@@ -111,11 +120,13 @@
         </transition>
     </div>
 
-    <router-view  />
+    <router-view />
+    <sponsors />
 </template>
 
 <script  setup>
 import pageLoader from './components/pageLoader.vue';
+import sponsors from './components/homeComponents/sponsors.vue'
 import {
     ref,
     onMounted,
@@ -129,13 +140,13 @@ const store = useStore()
 
 const loading = ref(true);
 
-setTimeout(() =>{
-    if(store.getters.useNfts !== null){
+setTimeout(() => {
+    if (store.getters.useNfts !== null) {
 
-        loading.value= false
+        loading.value = false
     }
 }, 0)
- 
+
 
 //    import loading components
 components: {
@@ -205,7 +216,7 @@ $secondary-color: #ECEF43;
     top: 0%;
     display: flex;
     align-items: center;
-   
+
 
 }
 

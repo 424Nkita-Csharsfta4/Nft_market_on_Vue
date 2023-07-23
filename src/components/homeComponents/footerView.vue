@@ -15,12 +15,7 @@
 				<router-link to="/">Home</router-link>
 			</p>
 			<p>
-				<router-link to="/Community"
-					>Community</router-link
-				>
-			</p>
-			<p>
-				<router-link to="/"
+				<router-link to="/About"
 					>Privacy Policy</router-link
 				>
 			</p>
@@ -35,6 +30,9 @@
 				<router-link to="/"
 					>Terms and conditions</router-link
 				>
+			</p>
+			<p>
+				<router-link to="/Login">Login</router-link>
 			</p>
 			<div class="sm-links">
 				<a href=""

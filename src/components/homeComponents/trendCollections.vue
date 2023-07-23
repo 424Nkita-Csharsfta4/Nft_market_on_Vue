@@ -206,10 +206,7 @@ let nfts = computed(() => {
                 
 
                 }
-                h5{
-                
 
-                }
 
                 .creator-detail {
 

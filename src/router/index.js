@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-
-import community from '@/views/community.vue'
-
-
+import Login from "@/views/Login.vue";
+import SignUp from "@/views/SignUp";
+import CryptoTransferForm from "@/views/CryptoTransferForm.vue"
+import Chat from "@/views/Chat.vue"
 
 const routes = [
   {
@@ -17,9 +17,24 @@ const routes = [
     component:()=>import('@/views/About.vue')
   },
   {
-    path: '/community',
-    name: 'community',
-    component: community
+    path: '/Login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/SignUp',
+    name: 'SignUp',
+    component: SignUp
+  },
+  {
+    path: '/Chat',
+    name: 'Chat',
+    component: Chat
+  },
+  {
+    path: '/Cryptotransfer',
+    name: 'Cryptotransfer',
+    component: CryptoTransferForm
   },
   {
     path: '/Market',

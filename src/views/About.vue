@@ -30,6 +30,7 @@
 	import { SteppedEase } from "gsap";
 	import TextPlugin from "gsap/TextPlugin";
 
+
 	components: {
 		footerViewVue;
 	}
@@ -85,10 +86,13 @@
 
 <style lang="scss">
 	@import "../assets/scss/_config.scss";
-
+.about-text{
+	color: white;
+}
 	.about {
 		height: 100vh;
 		width: 100%;
+		
 
 		&-box {
 			margin-top: 2.5%;

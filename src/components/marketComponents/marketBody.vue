@@ -20,7 +20,7 @@
                     <h2>{{nft.name}} </h2>
                     <p class="price">{{Math.round(nft.stats.total_average_price * 100) / 100}} Eth</p>
                     <p class="owner">By {{nft.twitter_username}}</p>
-                    <button class="btn" href="">Place bid</button>
+                    <router-link to="/Cryptotransfer" class="btn">Place bid</router-link>
                 </div>
                 <teleport to='body'>
     
@@ -32,7 +32,7 @@
                                 <p class="description">{{ nft.description.substring(0,200)+'...' }}</p>
                                 <p class="price">{{Math.round(nft.stats.total_average_price * 100) / 100}} Eth</p>
                                 <p class="owner"> By {{ nft.twitter_username?nft.twitter_username:'no name'}}</p>
-                                <button class="btn" href="">Place bid</button>
+                                <router-link to="/Cryptotransfer" class="btn">Place bid</router-link>
                             </div>
                             <figure>
                             <picture>
