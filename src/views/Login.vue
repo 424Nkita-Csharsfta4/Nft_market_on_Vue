@@ -1,48 +1,47 @@
 <template>
     <transition appear name="form">
-        <div class="form-container">
-            <h2>Login</h2>
-            <input type="email" v-model="email" placeholder="Email" />
-            <input type="password" v-model="password" placeholder="Password" />
-            <router-link to="/Market"><button @click="login">Login</button></router-link> 
-
-            <router-link to="/signup" class="routing">  <p>Don't have an account?<p>Register</p></p></router-link>
-        </div>
-    </transition>
-</template>
-
-<script setup>
-import { ref } from "vue";
-// import firebase from 'firebase/compat/app';
-// import 'firebase/compat/auth';
-// import 'firebase/compat/firestore';
-
-const email = ref("");
-const password = ref("");
-
- const login = () => {
-     if (!email.value || !password.value) {
-         alert("Please fill in all the fields.");
-         return;
-    }
- }
-
-    // firebase
-    //     .auth()
-    //     .signInWithEmailAndPassword(email.value, password.value)
-    //     .then(
-    //         (user) => {
-    //             console.log(user);
-    //         },
-    //         (err) => {
-//     //             alert(err.message);
-//     //         }
-//         );
-// };
-</script>
-
+      <div class="form-container">
+        <h2>Login</h2>
+        <input type="email" v-model="email" placeholder="Email" />
+        <input type="password" v-model="password" placeholder="Password" />
+        <router-link to="/Market"><button @click="login">Login</button></router-link>
   
-  <!-- Rest of the code remains unchanged -->
+        <router-link to="/signup" class="routing">
+          <p>Don't have an account?<span>Register</span></p>
+        </router-link>
+      </div>
+    </transition>
+  </template>
+  
+  <script setup>
+  import { ref } from "vue";
+  import firebase from 'firebase/compat/app';
+  import 'firebase/compat/auth';
+  import 'firebase/compat/firestore';
+  
+  const email = ref("");
+  const password = ref("");
+  
+  const login = () => {
+    if (!email.value || !password.value) {
+      alert("Please fill in all the fields.");
+      return;
+    }
+  
+    // Perform the login logic here using Firebase
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email.value, password.value)
+      .then(
+        (user) => {
+          console.log(user);
+        },
+        (err) => {
+          alert(err.message);
+        }
+      );
+  };
+  </script>
   
   
 <style lang="scss">

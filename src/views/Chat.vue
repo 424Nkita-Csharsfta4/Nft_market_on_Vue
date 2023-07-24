@@ -21,88 +21,82 @@
         <div v-else>
             <button @click="signInWithGoogle">Sign In with Google</button>
         </div>
-    </div>
+    </div> 
 </template>
   
-<script setup>
-// import { ref, onMounted } from "vue";
-// // import firebase from "firebase/app";
-// // import "firebase/auth";
-// import io from "socket.io-client";
+ <script setup>
+import { ref, onMounted } from "vue";
+import firebase from "firebase/compat/app"; // <-- Keep this import
+import "firebase/auth";
+import io from "socket.io-client";
 
-// const user = ref(null);
-// const messages = ref([]);
-// const newMessage = ref("");
+const user = ref(null);
+const messages = ref([]);
+const newMessage = ref("");
 
-// //Import the functions you need from the SDKs you need
-// // import firebase from 'firebase/app';
-// // import 'firebase/auth';
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyB_TkrcU0KQIemHrcX5rZlcPEPIZWITRcY",
+    authDomain: "vuelogin-2fe32.firebaseapp.com",
+    projectId: "vuelogin-2fe32",
+    storageBucket: "vuelogin-2fe32.appspot.com",
+    messagingSenderId: "355959677018",
+    appId: "1:355959677018:web:6270fd2c6e38fe2709f863",
+    measurementId: "G-QZMEEY9P90"
+};
 
-// // // Your web app's Firebase configuration
-// // const firebaseConfig = {
-// //   apiKey: "AIzaSyB_TkrcU0KQIemHrcX5rZlcPEPIZWITRcY",
-// //   authDomain: "vuelogin-2fe32.firebaseapp.com",
-// //   projectId: "vuelogin-2fe32",
-// //   storageBucket: "vuelogin-2fe32.appspot.com",
-// //   messagingSenderId: "355959677018",
-// //   appId: "1:355959677018:web:6270fd2c6e38fe2709f863",
-// //   measurementId: "G-QZMEEY9P90"
-// // };
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-// // // Initialize Firebase
-// // firebase.initializeApp(firebaseConfig);
+// Firebase Authentication
+const auth = firebase.auth();
 
-// // firebase.initializeApp(firebaseConfig);
+auth.onAuthStateChanged((authUser) => {
+    if (authUser) {
+        user.value = authUser;
+    } else {
+        user.value = null;
+    }
+});
 
-// // Firebase Authentication
-// const auth = firebase.auth();
+// WebSocket Communication
+const socket = io("ws://localhost:3000"); // Replace with your WebSocket server URL
 
-// auth.onAuthStateChanged((authUser) => {
-//     if (authUser) {
-//         user.value = authUser;
-//     } else {
-//         user.value = null;
-//     }
-// });
+const sendMessage = () => {
+    if (newMessage.value.trim() !== "") {
+        socket.emit("message", {
+            sender: user.value.displayName,
+            text: newMessage.value.trim(),
+        });
+        newMessage.value = "";
+    }
+};
 
-// // WebSocket Communication
-// const socket = io("ws://localhost:3000"); // Replace with your WebSocket server URL
+socket.on("message", (message) => {
+    messages.value.push(message);
+});
 
-// const sendMessage = () => {
-//     if (newMessage.value.trim() !== "") {
-//         socket.emit("message", {
-//             sender: user.value.displayName,
-//             text: newMessage.value.trim(),
-//         });
-//         newMessage.value = "";
-//     }
-// };
+// Sign In with Google
+const signInWithGoogle = async () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try {
+        await auth.signInWithPopup(provider);
+    } catch (error) {
+        console.error("Google Sign-In Error:", error);
+    }
+};
 
-// socket.on("message", (message) => {
-//     messages.value.push(message);
-// });
+onMounted(() => {
+    // Set up WebSocket connection
+    socket.on("connect", () => {
+        console.log("WebSocket connected");
+    });
 
-// // Sign In with Google
-// const signInWithGoogle = async () => {
-//     const provider = new firebase.auth.GoogleAuthProvider();
-//     try {
-//         await auth.signInWithPopup(provider);
-//     } catch (error) {
-//         console.error("Google Sign-In Error:", error);
-//     }
-// };
-
-// onMounted(() => {
-//     // Set up WebSocket connection
-//     socket.on("connect", () => {
-//         console.log("WebSocket connected");
-//     });
-
-//     socket.on("disconnect", () => {
-//         console.log("WebSocket disconnected");
-//     });
-// });
-</script>
+    socket.on("disconnect", () => {
+        console.log("WebSocket disconnected");
+    });
+});
+</script> 
   
 <style>
 .chat-app {
@@ -200,4 +194,4 @@ button:hover {
     background-color: #2a68bd;
 }
 </style>
-  
+   -->

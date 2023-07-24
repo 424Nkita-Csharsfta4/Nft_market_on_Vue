@@ -35,7 +35,7 @@
 		footerViewVue;
 	}
 	const tl = gsap.timeline();
-	// const cursor = document.getElementById('çursor')
+	 const cursor = document.getElementById('çursor')
 	gsap.registerPlugin(TextPlugin);
 	const aboutText = ref(null);
 	aboutText.value = `Welcome to our Bazaar! We are a

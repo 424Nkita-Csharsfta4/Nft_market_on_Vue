@@ -219,7 +219,9 @@ $secondary-color: #ECEF43;
 
 
 }
-
+.some-container {
+    justify-content: flex-start;
+}
 nav {
 
     width: 100%;
