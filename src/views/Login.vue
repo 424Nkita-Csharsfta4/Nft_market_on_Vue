@@ -17,13 +17,13 @@ import { ref } from "vue";
 // import 'firebase/compat/auth';
 // import 'firebase/compat/firestore';
 
-const email = ref("");
-const password = ref("");
+// const email = ref("");
+// const password = ref("");
 
-const login = () => {
-    if (!email.value || !password.value) {
-        alert("Please fill in all the fields.");
-        return;
+// const login = () => {
+//     if (!email.value || !password.value) {
+//         alert("Please fill in all the fields.");
+//         return;
     }
 
     // firebase
@@ -34,10 +34,10 @@ const login = () => {
     //             console.log(user);
     //         },
     //         (err) => {
-    //             alert(err.message);
-    //         }
-        );
-};
+//     //             alert(err.message);
+//     //         }
+//         );
+// };
 </script>
 
   
