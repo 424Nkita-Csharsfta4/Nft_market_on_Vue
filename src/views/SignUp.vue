@@ -64,7 +64,7 @@ const signup = () => {
 //                 alert(err.message);
 //             }
 //         );
-// };
+};
 </script>
   
   <!-- Rest of the code remains unchanged -->
