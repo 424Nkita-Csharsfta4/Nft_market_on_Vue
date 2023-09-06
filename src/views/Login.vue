@@ -15,32 +15,38 @@
   
   <script setup>
   import { ref } from "vue";
-  import firebase from 'firebase/compat/app';
-  import 'firebase/compat/auth';
-  import 'firebase/compat/firestore';
-  
-  const email = ref("");
-  const password = ref("");
-  
-  const login = () => {
+const email = ref("");
+const password = ref("");
+const login = () => {
     if (!email.value || !password.value) {
-      alert("Please fill in all the fields.");
-      return;
+        alert("Please fill in all the fields.");
+        return;
     }
-  
-    // Perform the login logic here using Firebase
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email.value, password.value)
-      .then(
-        (user) => {
-          console.log(user);
-        },
-        (err) => {
-          alert(err.message);
-        }
-      );
-  };
+
+    const formData = new FormData();
+    formData.append("email", email.value);
+    formData.append("password", password.value);
+
+    fetch("http://backend/server.php", {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.text();
+        })
+        .then((data) => {
+            console.log(data);
+            alert(data); // Display the response message
+        })
+        .catch((error) => {
+            console.error(error);
+            alert("An error occurred while sending the email.");
+        });
+};
+
   </script>
   
   
